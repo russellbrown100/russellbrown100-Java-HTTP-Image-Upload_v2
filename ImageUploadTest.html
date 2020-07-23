@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" CONTENT="no-cache">
+    <meta http-equiv="Expires" CONTENT="0">
+
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+		
+		
+  
+   
+	
+	
+    <title>File Upload</title>
+	
+	
+		
+		
+</head>
+<body>
+
+    
+
+        <img id='output' style="height:100px; width:100px;"><br>
+        <input type="file" name="the_file"  onchange='openFile(event)'><br>
+    
+        <form name="myform" method="post"  enctype="multipart/form-data" >
+            <input type ="hidden" name="myval">
+            <button type="submit">Start Upload</button><br>
+        </form>
+    
+    
+        
+        
+
+
+		<script type="text/javascript">
+                    
+                    //https://www.tutorialspoint.com/converting-images-to-a-base64-data-url-using-javascript
+                    function getDataUrl(img) {
+                    // Create canvas
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    // Set width and height
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    // Draw the image
+                    ctx.drawImage(img, 0, 0);
+                    return canvas.toDataURL('image/jpeg');
+                 }
+
+
+                var openFile = function(file) {
+                    var input = file.target;
+
+                    var reader = new FileReader();
+                    
+                    reader.onloadend  = function(){
+                      var dataURL = reader.result;
+                      var output = document.getElementById('output');
+                      
+                    output.src = dataURL;
+                    
+                    var val = document.getElementsByName("myval")[0];
+                    val.value = getDataUrl(output);
+                      
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                };
+    
+    </script>
+    
+		
+</body>
+
+
+</html>
+
+
